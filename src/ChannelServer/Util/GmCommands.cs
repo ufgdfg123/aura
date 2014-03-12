@@ -449,34 +449,48 @@ namespace Aura.Channel.Util
 
 		public CommandResult HandleVariant(ChannelClient client, Creature sender, Creature target, string message, string[] args)
 		{
-			if (args.Length < 2)
-				return CommandResult.InvalidArgument;
+			var pos = target.GetPosition();
 
-			var actualId = 1;
+			var actualId = target.RegionId;
 			var dynamicId = 35001;
-			var x = 12800;
-			var y = 38100;
+			var x = pos.X;
+			var y = pos.Y;
+
+			var regionData = AuraData.RegionDb.Find(actualId);
+			if (regionData == null)
+			{
+				Log.Error("HandleVariant: Region '{0}' not found in RegionDb.", actualId);
+				return CommandResult.Fail;
+			}
 
 			ChannelServer.Instance.World.AddRegion(35001);
 			sender.SetLocation(dynamicId, x, y);
 			sender.Warping = true;
 
-			var pp = new Packet(0x0000A97E, MabiId.Broadcast);
+			var pp = new Packet(Op.VariantWarp, MabiId.Broadcast);
 			pp.PutLong(sender.EntityId);
-			pp.PutInt(actualId);
-			pp.PutInt(dynamicId);
-			pp.PutInt(x);
-			pp.PutInt(y);
-			pp.PutInt(0);
+			{
+				// VariantWarp
+				pp.PutInt(actualId);
+				pp.PutInt(dynamicId);
+				pp.PutInt(x);
+				pp.PutInt(y);
+				pp.PutInt(0);
+			}
 			pp.PutInt(1);
 			pp.PutInt(dynamicId);
 			pp.PutString("DynamicRegion" + dynamicId);
 			pp.PutUInt(0x80000001);
-			pp.PutInt(1);
-			pp.PutString("uladh_main");
+			pp.PutInt(actualId);
+			pp.PutString(regionData.Name); // uladh_main
 			pp.PutInt(200);
 			pp.PutByte(0);
-			pp.PutString("data/world/uladh_main/" + args[1] + ".xml"); // region_variation_797208
+			pp.PutString("data/world/" + regionData.Name + "/" + (args.Length >= 2 ? args[1] + ".xml" : ""));
+			{
+				// DynamicWarp
+				//pp.PutInt(x);
+				//pp.PutInt(y);
+			}
 
 			client.Send(pp);
 

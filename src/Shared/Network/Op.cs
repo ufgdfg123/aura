@@ -188,12 +188,14 @@ namespace Aura.Shared.Network
 		public const int UseMotion = 0x6D62;
 		public const int CancelMotion = 0x6D65;
 		public const int MotionCancel2 = 0x6D66; // Delayed?
+		public const int SetStandStyle = 0x6D68;
 		public const int LevelUp = 0x6D69;
 		public const int RankUp = 0x6D6A;
 		public const int SitDown = 0x6D6C;
 		public const int StandUp = 0x6D6D;
 		public const int ArenaHideOn = 0x6D6F;
 		public const int ArenaHideOff = 0x6D70;
+		public const int SetStandStyleTalking = 0x6D79;
 		public const int ChangeStanceRequest = 0x6E28;
 		public const int ChangeStanceRequestR = 0x6E29;
 		public const int ChangeStance = 0x6E2A;
@@ -337,6 +339,7 @@ namespace Aura.Shared.Network
 		public const int NaoRevivalExit = 0x9098;
 		public const int NaoRevivalEntrance = 0x909C;
 		public const int DungeonInfo = 0x9470;
+		public const int DynamicWarp = 0x9571;
 		public const int ArenaRoundInfo = 0x9667;
 		public const int ArenaRoundInfoCancel = 0x9668;
 
@@ -373,6 +376,7 @@ namespace Aura.Shared.Network
 		public const int UmbrellaLand = 0xA8E2;
 		public const int SetBgm = 0xA910;
 		public const int UnsetBgm = 0xA911;
+		public const int VariantWarp = 0xA97E;
 		public const int EnableRoyalAlchemist = 0xA9A3;
 		public const int SosButtonRequest = 0xA9A9;
 		public const int SosButtonRequestR = 0xA9AA;

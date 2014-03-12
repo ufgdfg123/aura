@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace Aura.Data.Database
 {
-	public class RegionData
+	public class RegionInfoData
 	{
 		public int Id { get; internal set; }
 		public int X1 { get; internal set; }
@@ -115,7 +115,7 @@ namespace Aura.Data.Database
 		public string XML { get; internal set; }
 	}
 
-	public class RegionInfoDb : DatabaseDatIndexed<int, RegionData>
+	public class RegionInfoDb : DatabaseDatIndexed<int, RegionInfoData>
 	{
 		public Dictionary<long, PropData> PropEntries = new Dictionary<long, PropData>();
 		public Dictionary<long, EventData> EventEntries = new Dictionary<long, EventData>();
@@ -218,7 +218,7 @@ namespace Aura.Data.Database
 			var cRegions = br.ReadInt32();
 			for (int l = 0; l < cRegions; ++l)
 			{
-				var ri = new RegionData();
+				var ri = new RegionInfoData();
 
 				ri.Id = br.ReadInt32();
 				ri.X1 = br.ReadInt32();

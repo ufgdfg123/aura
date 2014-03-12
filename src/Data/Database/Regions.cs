@@ -1,11 +1,12 @@
 ﻿// Copyright (c) Aura development team - Licensed under GNU GPL
 // For more information, see license file in the main folder
 
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Aura.Data.Database
 {
-	public class MapData
+	public class RegionData
 	{
 		public int Id { get; internal set; }
 		public string Name { get; internal set; }
@@ -14,11 +15,13 @@ namespace Aura.Data.Database
 	/// <summary>
 	/// Indexed by map name.
 	/// </summary>
-	public class RegionDb : DatabaseCSVIndexed<string, MapData>
+	public class RegionDb : DatabaseCSVIndexed<string, RegionData>
 	{
-		public MapData Find(uint id)
+		public Dictionary<int, RegionData> EntriesId = new Dictionary<int, RegionData>();
+
+		public RegionData Find(int id)
 		{
-			return this.Entries.FirstOrDefault(a => a.Value.Id == id).Value;
+			return this.EntriesId.GetValueOrDefault(id);
 		}
 
 		public int TryGetRegionId(string region, int fallBack = 0)
@@ -37,11 +40,12 @@ namespace Aura.Data.Database
 		[MinFieldCount(2)]
 		protected override void ReadEntry(CSVEntry entry)
 		{
-			var info = new MapData();
+			var info = new RegionData();
 			info.Id = entry.ReadInt();
 			info.Name = entry.ReadString();
 
 			this.Entries[info.Name] = info;
+			this.EntriesId[info.Id] = info;
 		}
 	}
 }

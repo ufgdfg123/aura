@@ -65,5 +65,24 @@ namespace Aura.Tests.Shared.Network
 			Assert.Equal("test", packetR.GetString());
 			Assert.Equal(new byte[] { 1, 2, 3, 4, 5, 6, 8, 9 }, packetR.GetBin());
 		}
+
+		[Fact]
+		public void GettingSize()
+		{
+			var packet = new Packet(0x1020, 0x3040506070809010);
+			packet.PutByte(1);
+			packet.PutShort(2);
+			packet.PutInt(3);
+			packet.PutLong(4);
+			packet.PutFloat(5.6f);
+			packet.PutBin(new byte[] { 1, 2, 3, 4, 5, 6, 8, 9 });
+
+			Assert.Equal(50, packet.GetSize());
+
+			for (int i = 0; i < 1000; ++i)
+				packet.PutString("test" + i);
+
+			Assert.Equal(10942, packet.GetSize());
+		}
 	}
 }

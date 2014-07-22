@@ -4,7 +4,7 @@
 using Aura.Shared.Network;
 using Xunit;
 
-namespace Aura.Shared.Tests.Network
+namespace Aura.Tests.Shared.Network
 {
 	public class PacketTests
 	{

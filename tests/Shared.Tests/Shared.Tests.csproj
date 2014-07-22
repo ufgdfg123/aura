@@ -7,7 +7,7 @@
     <ProjectGuid>{2E84CC5B-3B28-4328-90CD-08C9FB214DF8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Shared.Tests</RootNamespace>
+    <RootNamespace>Aura.Tests.Shared</RootNamespace>
     <AssemblyName>Shared.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

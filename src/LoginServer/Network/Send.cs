@@ -460,6 +460,21 @@ namespace Aura.Login.Network
 		}
 
 		/// <summary>
+		/// Sends negative TradeCardR to client (temp).
+		/// </summary>
+		/// <param name="client"></param>
+		/// <param name="cardId">Negative response if 0.</param>
+		public static void TradeCardR(LoginClient client, long cardId)
+		{
+			var packet = new Packet(Op.TradeCardR, MabiId.Login);
+			packet.PutByte(cardId != 0);
+			if (cardId != 0)
+				packet.PutLong(cardId);
+
+			client.Send(packet);
+		}
+
+		/// <summary>
 		/// Adds server and channel information to packet.
 		/// </summary>
 		/// <param name="packet"></param>
@@ -547,8 +562,8 @@ namespace Aura.Login.Network
 				packet.PutLong(0);
 				packet.PutInt(0);
 				packet.PutByte(0); // 0: Human, 1: Elf, 2: Giant
-				packet.PutByte(0);
-				packet.PutByte(0);
+				packet.PutByte(0); // Assist character ?
+				packet.PutByte(0); // >0 hides all characters?
 			}
 
 			// Pets

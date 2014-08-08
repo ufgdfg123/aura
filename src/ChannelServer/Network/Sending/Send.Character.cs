@@ -64,7 +64,7 @@ namespace Aura.Channel.Network.Sending
 		/// </remarks>
 		/// <param name="client"></param>
 		/// <param name="creature">Negative response if null</param>
-		public static void EnterRegionRequestR(Creature creature)
+		public static void EnterRegionRequestR(ChannelClient client, Creature creature)
 		{
 			var packet = new Packet(Op.EnterRegionRequestR, MabiId.Channel);
 			packet.PutByte(creature != null);
@@ -75,7 +75,7 @@ namespace Aura.Channel.Network.Sending
 				packet.PutLong(DateTime.Now);
 			}
 
-			creature.Client.Send(packet);
+			client.Send(packet);
 		}
 
 		/// <summary>
@@ -336,6 +336,22 @@ namespace Aura.Channel.Network.Sending
 			packet.PutInt(creature.RegionId);
 			packet.PutInt(pos.X);
 			packet.PutInt(pos.Y);
+
+			creature.Client.Send(packet);
+		}
+
+		/// <summary>
+		/// Sends AgeUpEffect to creature's client.
+		/// </summary>
+		/// <remarks>
+		/// Notice + Light effect.
+		/// Effect is only played for ages 1~25.
+		/// </remarks>
+		/// <param name="creature"></param>
+		public static void AgeUpEffect(Creature creature, short age)
+		{
+			var packet = new Packet(Op.AgeUpEffect, creature.EntityId);
+			packet.PutShort(age);
 
 			creature.Client.Send(packet);
 		}

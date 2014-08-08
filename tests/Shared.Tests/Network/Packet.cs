@@ -8,6 +8,9 @@ namespace Aura.Tests.Shared.Network
 {
 	public class PacketTests
 	{
+		/// <summary>
+		/// Building packet to byte array.
+		/// </summary>
 		[Fact]
 		public void BuildingNewPacket()
 		{
@@ -25,6 +28,9 @@ namespace Aura.Tests.Shared.Network
 			Assert.Equal(built, new byte[] { 0x00, 0x00, 0x10, 0x20, 0x30, 0x40, 0x50, 0x60, 0x70, 0x80, 0x90, 0x10, 0x2B, 0x07, 0x00, 0x01, 0x01, 0x02, 0x00, 0x02, 0x03, 0x00, 0x00, 0x00, 0x03, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x05, 0x33, 0x33, 0xB3, 0x40, 0x06, 0x00, 0x05, 0x74, 0x65, 0x73, 0x74, 0x00, 0x07, 0x00, 0x08, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x08, 0x09 });
 		}
 
+		/// <summary>
+		/// Reading packet from byte array.
+		/// </summary>
 		[Fact]
 		public void ReadingPacketFromBuffer()
 		{
@@ -41,6 +47,9 @@ namespace Aura.Tests.Shared.Network
 			Assert.Equal(new byte[] { 1, 2, 3, 4, 5, 6, 8, 9 }, packet.GetBin());
 		}
 
+		/// <summary>
+		/// Reading packet from built packet.
+		/// </summary>
 		[Fact]
 		public void ReadingPacketFromPacket()
 		{
@@ -66,6 +75,9 @@ namespace Aura.Tests.Shared.Network
 			Assert.Equal(new byte[] { 1, 2, 3, 4, 5, 6, 8, 9 }, packetR.GetBin());
 		}
 
+		/// <summary>
+		/// Getting size required for packet.
+		/// </summary>
 		[Fact]
 		public void GettingSize()
 		{

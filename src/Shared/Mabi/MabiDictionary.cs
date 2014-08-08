@@ -82,7 +82,7 @@ namespace Aura.Shared.Mabi
 		public uint GetUInt(string key) { return (uint)this.Get<int>(key); }
 		public long GetLong(string key) { return this.Get<long>(key); }
 		public ulong GetULong(string key) { return (ulong)this.Get<long>(key); }
-		public float GetFLoat(string key) { return this.Get<float>(key); }
+		public float GetFloat(string key) { return this.Get<float>(key); }
 		public string GetString(string key) { return this.Get<string>(key); }
 		public bool GetBool(string key) { return this.Get<bool>(key); }
 
@@ -189,7 +189,7 @@ namespace Aura.Shared.Mabi
 					case "4": this.Set(key, Convert.ToInt32(val)); break;
 					case "8": this.Set(key, Convert.ToInt64(val)); break;
 					case "f": this.Set(key, Convert.ToSingle(val, CultureInfo.InvariantCulture)); break;
-					case "s": this.Set(key, val.Replace("%S", ";")); break;
+					case "s": this.Set(key, val.Replace("%S", ";").Replace("%C", ":")); break; // TODO: What about %S and %C?
 					case "b": this.Set(key, val == "1"); break;
 				}
 			}

@@ -244,3 +244,13 @@ public class TreforBaseScript : NpcScript
 		}
 	}
 }
+
+public class TreforShop : NpcShopScript
+{
+    public override void Setup()
+    {
+        //Party Quest tab
+       
+        Add("Etc.", 1051); 	     // Battle Arena : Aim for a Giant Star
+    }
+}

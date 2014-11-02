@@ -52,7 +52,7 @@ public class RanaldBaseScript : NpcScript
 				
 			case "@shop":
 				Msg("Tell me if you need a Quest Scroll.<br/>Working on these quests can also be a good way to train yourself.");
-				Msg("(Unimplemented)");
+				OpenShop("RanaldShop");
 				return;
 				
 			case "@upgrade":
@@ -280,4 +280,19 @@ public class RanaldBaseScript : NpcScript
 				break;
 		}
 	}
+}
+
+public class RanaldShop : NpcShopScript
+{
+    public override void Setup()
+    {
+        Add("Arena", 63019, 10); 	// Alby Battle Arena Coin x10
+        Add("Arena", 63019, 20); 	// Alby Battle Arena Coin x20
+        Add("Arena", 63019, 50);	// Alby Battle Arena Coin x50
+        Add("Arena", 63019, 100);   // Alby Battle Arena Coin x100
+
+        //Quest tab
+
+        Add("Reference Book", 1078);	// Don't Give Up! Trefor's Training Towards Veteranship
+    }
 }
